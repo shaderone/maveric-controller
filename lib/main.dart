@@ -26,8 +26,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Root extends StatelessWidget {
+class Root extends StatefulWidget {
   const Root({super.key});
+
+  @override
+  State<Root> createState() => _RootState();
+}
+
+class _RootState extends State<Root> {
+  bool start = false;
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +93,16 @@ class Root extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         // update icon color
+                        setState(() {
+                          start = !start;
+                        });
                       },
-                      icon: const Icon(Icons.power, color: Colors.white),
+                      icon: Icon(
+                        start
+                            ? MdiIcons.powerPlug
+                            : MdiIcons.powerPlugOffOutline,
+                        color: start ? Colors.amber : Colors.white,
+                      ),
                     )
                   ],
                 ),
